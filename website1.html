@@ -1,0 +1,57 @@
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>Yaxin Jiang Resume</title>  
+    <style>  
+        body {  
+            background-image: url('UXT4GWxjPy.jpg');  
+        }  
+    </style>  
+</head>  
+<body>  
+    <h1>Resume of Yaxin Jiang</h1>  
+    <form name="YaxinJiangForm" action="submit_resume.php" method="post"> <!-- 假设表单数据会提交到submit_resume.php -->  
+        <table border="0" cellpadding="4" cellspacing="4" style="width:500px;">  
+            <tbody>  
+                <tr>  
+                    <td>Student ID</td>  
+                    <td><input type="text" name="student_id" /></td>  
+                </tr>  
+                <tr>  
+                    <td>Last Name</td>  
+                    <td><input type="text" name="last_name" /></td>  
+                </tr>  
+                <tr>  
+                    <td>First Name</td>  
+                    <td><input type="text" name="first_name" /></td>  
+                </tr>  
+                <tr>  
+                    <td>Age</td>  
+                    <td>  
+                        <select name="age" size="1">  
+                            <option value="10">10 years</option>  
+                            <option value="11">11 years</option>  
+                            <!-- Add more options if needed -->  
+                        </select>  
+                    </td>  
+                </tr>  
+                <tr>  
+                    <td>Major</td>  
+                    <td>  
+                        <input type="radio" name="major" value="CIS" /> CIS  
+                        &nbsp;  
+                        <input type="radio" name="major" value="math" /> Math  
+                    </td>  
+                </tr>  
+                <tr>  
+                    <td colspan="2" style="text-align: center;">  
+                        <input type="submit" name="submit" value="Submit" />  
+                    </td>  
+                </tr>  
+            </tbody>  
+        </table>  
+    </form>  
+</body>  
+</html>
