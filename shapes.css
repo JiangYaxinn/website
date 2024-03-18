@@ -1,0 +1,50 @@
+/* shapes.css */  
+  
+/* Disk Shape */  
+.disk {  
+    width: 100px;  
+    height: 100px;  
+    background-color: #f00; /* 红色 */  
+    border-radius: 50%;  
+    margin: 20px;  
+}  
+  
+/* Egg Shape */  
+.egg {  
+    width: 120px;  
+    height: 150px;  
+    background-color: #ff0; /* 黄色 */  
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;  
+    margin: 20px;  
+}  
+  
+/* Heart Shape */  
+.heart {  
+    position: relative;  
+    width: 100px;  
+    height: 90px;  
+    background-color: #f0f; /* 粉色 */  
+    margin: 20px;  
+}  
+  
+.heart::before, .heart::after {  
+    position: absolute;  
+    content: "";  
+    top: 40px;  
+    width: 52px;  
+    height: 80px;  
+    background: inherit;  
+    border-radius: 50px 50px 0 0;  
+}  
+  
+.heart::before {  
+    left: 50px;  
+    transform: rotate(-45deg);  
+    transform-origin: 0 100%;  
+}  
+  
+.heart::after {  
+    left: 0;  
+    transform: rotate(45deg);  
+    transform-origin: 100% 100%;  
+}
