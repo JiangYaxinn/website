@@ -1,41 +1,76 @@
-<script>
-let a = {id:'D10755530',name:"John Smith"};
-let b = {};
-a ["age"] = 12;
+let diskCount = 3;
+let speed = 1000; // default speed (slow)
+let disks = [];
 
-document.write(a["id"] + "<br>");
-document.write(a["name"] + "<br>");
-//search by key is fast
-//search by value is slow
-
-for (let key in b)
-document.write("key =" + key +",value=" +b[key] + "<br>" );
-document.write(b.length + "<br>");
-b ["id"]=62321;
-document.write(b.id + "<br>");
-delete b["id"];
-document.write(b.id + "<br>");
-</script>
-
-Use associate to create a name space
-schedule task
-<script>
-let x =2;
-var My =
-{
-	writeln : function(x){document.writeln(x + "<br>");},
-	x:1,
-	geti : function(x){return document.getElementById(x);}
+function startGame() {
+    resetGame();
+    createDisks();
+    moveTower(diskCount, 1, 3, 2);
 }
-My.writeln("abc");
 
-//let handle = setTimeout(Nargfunctionname,2000);
-//clearTimeout(handle);
-setTimeout("My.writeln('1')",1000);
-setTimeout("My.writeln('2')",2000);
-setTimeout("My.writeln('3')",3000);
-function fn(){My.writeln('A');}
-handle = setInterval(fn,2000);
+function resetGame() {
+    const container = document.querySelector('.tower-container');
+    container.innerHTML = '<div class="pillar" id="pillar1"></div><div class="pillar" id="pillar2"></div><div class="pillar" id="pillar3"></div>';
+    disks = [];
+}
 
-setTimeout('clearInterval(handle)',10000);
-</script>
+function createDisks() {
+    const pillar1 = document.getElementById('pillar1');
+    for (let i = 0; i < diskCount; i++) {
+        const disk = document.createElement('div');
+        disk.className = 'disk';
+        disk.style.width = `${50 + i * 20}px`;
+        disk.style.bottom = `${i * 25}px`;
+        pillar1.appendChild(disk);
+        disks.push(disk);
+    }
+}
+
+function moveDisk(disk, source, destination) {
+    const sourcePillar = document.getElementById(`pillar${source}`);
+    const destPillar = document.getElementById(`pillar${destination}`);
+    const topDisk = destPillar.querySelector('.disk');
+
+    const sourceRect = sourcePillar.getBoundingClientRect();
+    const destRect = destPillar.getBoundingClientRect();
+
+    const offsetX = destRect.left - sourceRect.left;
+    const offsetY = destRect.top - sourceRect.top;
+
+    disk.style.transition = `top ${speed / 1000}s ease-in-out`;
+    disk.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
+
+    setTimeout(() => {
+        destPillar.prepend(disk);
+        disk.style.transition = 'none';
+        disk.style.transform = 'none';
+        disk.style.top = '0';
+    }, speed);
+}
+
+function moveTower(height, source, destination, auxiliary) {
+    if (height > 0) {
+        moveTower(height - 1, source, auxiliary, destination);
+        moveDisk(disks[height - 1], source, destination);
+        moveTower(height - 1, auxiliary, destination, source);
+    }
+}
+
+function pauseGame() {
+    // Implement pause logic (clear any running timeouts)
+    clearTimeout();
+}
+
+function resumeGame() {
+    // Implement resume logic (restart any paused timeouts)
+    startGame();
+}
+
+function changeDiskCount() {
+    diskCount = parseInt(document.getElementById('diskCount').value);
+    startGame();
+}
+
+function changeSpeed() {
+    speed = parseInt(document.getElementById('speed').value);
+}

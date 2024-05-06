@@ -1,24 +1,34 @@
-<html>
-<script>
-N=0;
-function move(n,source,destination,temp)
-{
-	if(n==1)
-	{
-		N++;
-		document.writeln("move"+"from"+source+"to"+destination+"<br>");
-		console.log("move"+"from"+source+"to"+destination);
-	}
-	else
-	{
-	move(n-1,source,temp,destination);
-	move(1,source,destination,temp);
-	move(n-1,temp,destination,source);
-	}
-}
-
-move(7,1,2,3);//move 7 disks from 1 to 3 using 2 as temp storage
-document.writeln("times of moving="+N);
-
-</script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tower of Hanoi</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="script.js"></script>
+</head>
+<body>
+    <div class="tower-container">
+        <div class="pillar" id="pillar1"></div>
+        <div class="pillar" id="pillar2"></div>
+        <div class="pillar" id="pillar3"></div>
+        <div class="base">
+            <button onclick="startGame()">Start</button>
+            <button onclick="pauseGame()">Pause</button>
+            <button onclick="resumeGame()">Resume</button>
+            <label for="diskCount">Number of Disks:</label>
+            <select id="diskCount" onchange="changeDiskCount()">
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+            <label for="speed">Speed:</label>
+            <select id="speed" onchange="changeSpeed()">
+                <option value="1000">Slow</option>
+                <option value="500">Medium</option>
+                <option value="200">Fast</option>
+            </select>
+        </div>
+    </div>
+</body>
 </html>
